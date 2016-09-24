@@ -435,7 +435,9 @@ void cross_validate(){
 int main(){
   srand(time(NULL));
   generate_primes();
-  printf("Seeding with initial strategy:\n");
-  train();
+  // printf("Seeding with initial strategy:\n");
+  // train();
+  read_memory("memory.proc");
+  save_memory_as_pylist();
   return 0;
 }
