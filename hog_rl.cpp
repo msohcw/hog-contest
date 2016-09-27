@@ -308,7 +308,7 @@ void save_memory(){
 
 void save_memory_as_pylist(){
   FILE * file;
-  file = fopen("py_list.txt", "w");
+  file = fopen("list.py", "w");
   fprintf(file, "[");
   for(int i = 0; i < 101; ++i){
     fprintf(file,"[");
@@ -365,11 +365,11 @@ void train(){
     winrates[3] = average_win_rate(act, swap_and_5, games_per_run);
     if(initialised) winrates[4] = average_win_rate(act, final_strategy, games_per_run);
     
-    printf("epoch: %4d type: 4    epsilon: %lf winrate: %f\n", i + 1, epsilon, winrates[0]);
-    printf("            type: rand epsilon: %lf winrate: %f\n", epsilon, winrates[1]);
-    printf("            type: rl   epsilon: %lf winrate: %f\n", epsilon, winrates[2]);
-    printf("            type: s&5  epsilon: %lf winrate: %f\n", epsilon, winrates[3]);
-    if(initialised) printf("            type: fin  epsilon: %lf winrate: %f\n", epsilon, winrates[4]);
+    printf("epoch: %6d type: 4    epsilon: %lf winrate: %f\n", i + 1, epsilon, winrates[0]);
+    printf("              type: rand epsilon: %lf winrate: %f\n", epsilon, winrates[1]);
+    printf("              type: rl   epsilon: %lf winrate: %f\n", epsilon, winrates[2]);
+    printf("              type: s&5  epsilon: %lf winrate: %f\n", epsilon, winrates[3]);
+    if(initialised) printf("              type: fin  epsilon: %lf winrate: %f\n", epsilon, winrates[4]);
     
     if(!initialised && i > 150){
       initialised = true;
@@ -393,7 +393,7 @@ void test_strategy(){
   printf("type: s    winrate: %f\n", average_win_rate(final_strategy, just_swap, games_per_test));
 }
 
-int number_of_strategies = 18;
+int number_of_strategies = 2;
 int competing_strategies[20][101][101];
 int points[20];
 int s1,s2;
@@ -435,9 +435,10 @@ void cross_validate(){
 int main(){
   srand(time(NULL));
   generate_primes();
-  // printf("Seeding with initial strategy:\n");
-  // train();
-  read_memory("memory.proc");
-  save_memory_as_pylist();
+  printf("Seeding with initial strategy:\n");
+  train();
+  // read_memory("memory.proc");
+  // save_memory_as_pylist();
+  //cross_validate();
   return 0;
 }

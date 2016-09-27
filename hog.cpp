@@ -374,8 +374,6 @@ void train_strategy(){
 int main(){
   srand(time(NULL));
   generate_primes();
-  //read_memory();
-  //train_strategy();
-  train_initial();
+  //train_initial();
   return 0;
 }
